@@ -1,0 +1,39 @@
+editNote(uid){
+    const noteIndex = this.state.notes.map(note => {
+        return note.uid
+    }).indexOf(uid);
+    
+    const note = this.state.notes[noteIndex];
+    
+    this.edit = {
+        editing: true, 
+        uid,
+        note: note,
+    }
+    
+    this.mode()
+    this.save(note);
+    
+    this.forceUpdate();
+    
+    
+}
+mode(){
+    if(this.edit.editing == true) {
+        const note = this.edit.note;
+        this.setState({
+            titleInput: note.title,
+            contentInput: note.content
+        })
+    } else {
+        return;
+    }
+}
+save(note){
+    console.log("save method: ", note)
+    // note.title = this.edit.note.title;
+    // note.content = this.edit.note.content;
+    
+    this.edit.editing = false;
+    this.forceUpdate()
+}
